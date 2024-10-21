@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html  lang="es">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Informe</title>
+</head>
+<body>
+    <img src="/static/images/Etiqueta.jpg"/>
+    <br><br><br><br><br>
+    <p>Fecha: {{ fecha }}</p>
+    <p>Cedula: {{ cedula }}</p>
+    <p>Nombre: {{ nombre }}  {{apellido}}</p>
+    <p>Edad: {{ edad }}</p>
+    <h3 style="text-align: center;">INFORME ECOGRAFIA VIAS URINARIAS</h3><hr>
+    <p style="text-align: justify;">
+        Con transductor Convexo multifrecuencial de 5 MHz se realizo estudio ecografico del abdomen con 
+        los siguientes hallazgos:
+    </p>
+    <p style="text-align: justify;">
+        RINON DERECHO: {{rinonDerecho}}  
+    </p>
+    <p style="text-align: justify;">
+        RINON IZQUIERDO: {{rinonIzquierdo}}  
+    </p>
+    <p style="text-align: justify;">
+        VEJIGA: {{vejiga}}  
+    </p>
+    <p style="text-align: justify;">
+        PROSTATA: {{prostata}}  
+    </p>
+    <p style="text-align: justify;">
+        OPINION: {{opinion}}  
+    </p>
+    <br><br><br><br><br>
+    <dl class="row" style="text-align: center;">
+        <dt class="col-sm-3">TOMAS CASTELBLANCO</dt>
+        <dt class="col-sm-3">MEDICO UROLOGO</dt> 
+        <dt class="col-sm-3">C.I 24.588.188 </dt>
+        <dt class="col-sm-3">M.P.P.S 65660</dt>
+    </dl>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: '¡Éxito!',
+            text: 'El PDF se ha generado correctamente.'
+        }).then(() => {
+            // Redirige a la página de inicio después de cerrar el SweetAlert
+            window.location.href = "/formulario"; 
+        });
+    </script>
+</body>
+</html>

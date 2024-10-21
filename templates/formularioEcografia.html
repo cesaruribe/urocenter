@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% extends 'menu.html' %}
+
+{% block content %}
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <title>Informe Ecografia Vias Urinarias</title>
+    </head>
+    <body>
+        <div class="container-fluid h-100 bg-light text-dark">
+            <div class="d-flex justify-content-center align-items-center container">
+                <form class="border border-primary rounded p-2" action="/generar_pdf" method="POST">
+                    <div class="row mb-4">
+                        <div class="text-align: center">
+                            <h2 style="text-align: center;">Informe Ecografico Vias Urinarias</h2>
+                            <hr class="my-4 mx-auto">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="fecha" class="form-label">Fecha</label>
+                            <input class="form-control form-control-sm" 
+                                type="date"  
+                                id="fecha" name="fecha">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cedula" class="form-label">Cedula</label>
+                            <input class="form-control form-control-sm" 
+                                type="text"  
+                                id="cedula" name="cedula">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="nombre" class="form-label">Nombre</label>
+                            <input class="form-control form-control-sm" 
+                                type="text" 
+                                placeholder="Nombres del Paciente" 
+                                id="nombre" name="nombre">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="apellido" class="form-label">Apellidos</label>
+                            <input class="form-control form-control-sm" 
+                                type="text" 
+                                placeholder="Apellidos del Paciente" 
+                                id="apellido" name="apellido">
+                        </div>
+                        <div class="col-sm-2">
+                            <label for="edad" class="form-label">Edad</label>
+                            <input class="form-control form-control-sm" 
+                                type="number" 
+                                id="edad" name="edad">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="rinonDerecho" class="form-label">Riñon Derecho</label>
+                            <textarea class="form-control" id="rinonDerecho" name="rinonDerecho" rows="4"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label for="rinonIzquierdo" class="form-label">Riñon Izquierdo</label>
+                            <textarea class="form-control" id="rinonIzquierdo" name="rinonIzquierdo" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="vejiga" class="form-label">Vejiga</label>
+                            <textarea class="form-control" id="Vejiga" name="vejiga" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="prostata" class="form-label">Prostata</label>
+                            <textarea class="form-control" id="prostata" name="prostata" rows="4"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="opinion" class="form-label">Opinion</label>
+                            <textarea class="form-control" id="opinion" name="opinion" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button type="submit" class="btn btn-success">Generar PDF</button>
+                        <button type="reset" class="btn btn-danger">Restablecer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>
+{% endblock %}
