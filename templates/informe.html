@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html  lang="es">
+
 <head>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Informe</title>
 </head>
 <body>
-    <img src="/static/images/Etiqueta.jpg"/>
-    <br><br><br><br><br>
+   <!-- <img src="/static/images/Etiqueta.jpg"/> -->
+    <br><br><br><br><br><br><br><br>
     <p>Fecha: {{ fecha }}</p>
     <p>Cedula: {{ cedula }}</p>
     <p>Nombre: {{ nombre }}  {{apellido}}</p>
@@ -30,7 +31,7 @@
     </p>
     <p style="text-align: justify;">
         OPINION: {{opinion}}  
-    </p>
+    </p> 
     <br><br><br><br><br>
     <dl class="row" style="text-align: center;">
         <dt class="col-sm-3">TOMAS CASTELBLANCO</dt>
@@ -47,6 +48,6 @@
             // Redirige a la página de inicio después de cerrar el SweetAlert
             window.location.href = "/formulario"; 
         });
-    </script>
+    </script> 
 </body>
 </html>
