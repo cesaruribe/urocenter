@@ -22,9 +22,8 @@ def generar_pdf():
         data = request.form
         # Construye el nombre del archivo
         nombre_archivo = f"{subdirectorio}informe_{data['cedula']}_{data['fecha']}.pdf"
-        #pdfkit.from_string(render_template('informe.html', **data), "informe.pdf", options={"disable-remote-error": True})
         pdfkit.from_string(render_template('informe.html', **data), nombre_archivo, 
-                        options={"page-size": "Letter"})
+                        options={"page-size": "Letter", "encoding": "UTF-8"})
         return redirect(url_for('informe'))
         #return jsonify({"message": "PDF generado exitosamente"})
     except Exception as e:
