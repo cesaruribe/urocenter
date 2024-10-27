@@ -3,20 +3,20 @@
 {% extends "menu.html" %}
 <head>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <title>ERROR</title>
+    <title>EXITOSO</title>
 </head>
 <body>
     {% block content %}
-    <h1 style="text-align: center;">ERROR !! ARCHIVO NO GENERADO !!</h1>
+    <h1 style="text-align: center;">PROCESO EXITOSO !!</h1>
     {% endblock %}  
     <script>
         Swal.fire({
-            icon: 'error',
-            title: '¡Error!',
-            text: 'Hubo un problema al generar el PDF.'
+            icon: 'success',
+            title: '¡Exitoso!',
+            text: ' Proceso Exitos al generar  PDF.'
         }).then(() => {
             // Redirige a la página de inicio después de cerrar el SweetAlert
-            window.location.href = "/formulario";
+            window.location.href = "/home";
         });
     </script>     
 </body>

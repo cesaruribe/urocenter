@@ -6,14 +6,33 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <script>
+            function validateDate() {
+                const fechaInput = document.getElementById("fecha");
+                const fecha = fechaInput.value;
+    
+                // Validación básica: el navegador ya verifica si es una fecha válida
+                if (!fecha) {
+                    alert("Por favor, selecciona una fecha.");
+                    return false;
+                }
+                // Verificar si la fecha está dentro de un rango (ajusta según tus necesidades)
+                const fechaMinima = new Date('2023-01-01');
+                const fechaMaxima = new Date('2028-12-31');
+                if (fecha < fechaMinima || fecha > fechaMaxima) {
+                    alert("La fecha debe estar entre el 01/01/2023 y el 31/12/2028.");
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <title>Procesamiento de Informes</title>
     </head>
     <body>
-        <div class="container-fluid h-100 bg-light text-dark">
+        <div class="container-fluid">
             <div class="d-flex justify-content-center align-items-center container">
-                <form class="border border-primary rounded p-3" action="/overlay" method="POST">
-                    <div class="row mb-6">
+                <form class="border border-primary rounded p-3" action="/overlay" method="POST" onsubmit="return validateDate()">
+                    <div class="row align-items-center mx-2"> 
                         <div class="text-align: center">
                             <h2 style="text-align: center;">Procesamiento de Informes PDF</h2>
                             <hr class="my-4 mx-auto">
@@ -24,9 +43,22 @@
                             <input class="form-control form-control-sm" 
                                 type="date"  
                                 id="fecha" name="fecha">
+                        </div><br><br><br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo" id="radio1" value="his">
+                            <label class="form-check-label" for="defaultCheck1">
+                              Historias
+                            </label>
                         </div>
-                        <br><br><br>
-                        <div class="button">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="tipo" id="radio2" value="eco">
+                            <label class="form-check-label" for="defaultCheck2">
+                              Ecografías
+                            </label>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="button">
                         <button type="submit" class="btn btn-success">Procesar PDF</button>
                         <button type="reset" class="btn btn-danger">Restablecer</button>
                     </div>

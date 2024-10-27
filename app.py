@@ -1,6 +1,6 @@
 from flask import Flask,render_template, url_for,redirect,request
-from overlay import overlayFiles
-import pdfkit, PyPDF2
+from overlay import superPonerArchivos
+import pdfkit
 
 app = Flask(__name__)
 
@@ -38,7 +38,7 @@ def generar_pdf():
 @app.route('/generarH_pdf', methods=['POST'])
 def generarH_pdf():
     try:
-        subdirectorio = "informesPDF/"
+        subdirectorio = "informesHPDF/"
         data = request.form
         # Construye el nombre del archivo
         nombre_archivo = f"{subdirectorio}Hinforme_{data['cedula']}_{data['apellido']}_{data['fecha']}.pdf"
@@ -63,20 +63,31 @@ def informeH():
 def errorPDF():
     return render_template('errorPDF.html')
 
+@app.route('/exitoso')
+def exitoso():
+    return render_template('exitoso.html')
+
 @app.route('/procesar')
 def procesar():
     return render_template('procesaPDFs.html')
 
-
 @app.route('/overlay', methods=['POST'])
 def overlay():
     try:
-        subdirectorio = "informesPDF/"
         data = request.form
-        # Construye el nombre del archivo
-        #nombre_archivo = f"{subdirectorio}Hinforme_{data['cedula']}_{data['apellido']}_{data['fecha']}.pdf"
-        overlayFiles("base.pdf","basef.pdf","baser.pdf")
-        return render_template('contacto.html')
+        base = ""
+        if data['tipo'] == "his":
+            subdirectorio = "informesHPDF/"
+            base = "base.pdf"
+        else:
+            subdirectorio = "informesPDF/"  
+            base = "basef.pdf"  
+        if (superPonerArchivos(subdirectorio,base,data['fecha'])== False):
+            return redirect(url_for('errorPDF'))
+        else:    
+            return redirect(url_for('exitoso'))
+        
+        #return render_template('/contacto')
     except Exception as e:
         app.logger.error(f"Error al procesar PDFs: {e}")
         return redirect(url_for('errorPDF'))    
