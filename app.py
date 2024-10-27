@@ -1,5 +1,6 @@
-from flask import Flask, render_template, url_for,jsonify,redirect,request
-import pdfkit
+from flask import Flask,render_template, url_for,redirect,request
+from overlay import overlayFiles
+import pdfkit, PyPDF2
 
 app = Flask(__name__)
 
@@ -29,11 +30,10 @@ def generar_pdf():
         pdfkit.from_string(render_template('informe.html', **data), nombre_archivo, 
                         options={"page-size": "Letter", "encoding": "UTF-8"})
         return redirect(url_for('informe'))
-        #return jsonify({"message": "PDF generado exitosamente"})
+        
     except Exception as e:
         app.logger.error(f"Error al generar PDF: {e}")
         return redirect(url_for('errorPDF'))
-        #return jsonify({"error": "Error al generar PDF"}), 500
 
 @app.route('/generarH_pdf', methods=['POST'])
 def generarH_pdf():
@@ -45,11 +45,11 @@ def generarH_pdf():
         pdfkit.from_string(render_template('informeH.html', **data), nombre_archivo, 
                         options={"page-size": "Letter", "encoding": "UTF-8"})
         return redirect(url_for('informeH'))
-        #return jsonify({"message": "PDF generado exitosamente"})
+        
     except Exception as e:
         app.logger.error(f"Error al generar PDF: {e}")
         return redirect(url_for('errorPDF'))
-        #return jsonify({"error": "Error al generar PDF"}), 500
+        
 
 @app.route('/informe')
 def informe():
@@ -62,6 +62,24 @@ def informeH():
 @app.route('/errorPDF')
 def errorPDF():
     return render_template('errorPDF.html')
+
+@app.route('/procesar')
+def procesar():
+    return render_template('procesaPDFs.html')
+
+
+@app.route('/overlay', methods=['POST'])
+def overlay():
+    try:
+        subdirectorio = "informesPDF/"
+        data = request.form
+        # Construye el nombre del archivo
+        #nombre_archivo = f"{subdirectorio}Hinforme_{data['cedula']}_{data['apellido']}_{data['fecha']}.pdf"
+        overlayFiles("base.pdf","basef.pdf","baser.pdf")
+        return render_template('contacto.html')
+    except Exception as e:
+        app.logger.error(f"Error al procesar PDFs: {e}")
+        return redirect(url_for('errorPDF'))    
 
 @app.route('/contacto')
 def contacto():
